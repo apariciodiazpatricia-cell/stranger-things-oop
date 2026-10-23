@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hawkins 2D Arena - Upside Down Live</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Consolas', monospace; }
+    body { background: #06070a; color: #eee; display: flex; flex-direction: column; align-items: center; padding-top: 15px; }
+    h1 { color: #ff0044; font-size: 22px; letter-spacing: 4px; text-shadow: 0 0 10px #ff0044, 0 0 25px #b0002e; margin-bottom: 12px; }
+    #stage-container { position: relative; width: 900px; height: 380px; background: radial-gradient(ellipse at 50% 80%, #200516, #05060a 80%); border: 2px solid #331525; border-radius: 12px; box-shadow: 0 0 35px rgba(255,0,68,0.25); overflow: hidden; }
+    .spore { position: absolute; background: rgba(255,255,255,0.4); border-radius: 50%; pointer-events: none; animation: floatUp linear infinite; }
+    @keyframes floatUp { 0% { transform: translateY(380px); opacity: 0; } 50% { opacity: 0.7; } 100% { transform: translateY(-20px); opacity: 0; } }
+    .floor { position: absolute; bottom: 0; width: 100%; height: 60px; background: linear-gradient(to top, #110d14, transparent); border-top: 1px solid #ff004433; }
+    .figure { position: absolute; bottom: 50px; width: 110px; height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; transition: 0.4s ease; }
+    .figure-name { font-size: 11px; font-weight: bold; color: #00f0ff; margin-top: 6px; text-shadow: 0 0 5px #00f0ff; }
+    .head { width: 32px; height: 32px; border-radius: 50%; position: relative; background: #ffd4b2; margin-bottom: 2px; }
+    .body { width: 36px; height: 58px; border-radius: 6px; position: relative; }
+    /* Eleven */
+    #eleven { left: 60px; } #eleven .body { background: #ea7299; }
+    .el-hair { position: absolute; top: -3px; left: -2px; width: 36px; height: 18px; background: #3b2219; border-radius: 14px 14px 0 0; }
+    .blood-drop { position: absolute; top: 20px; left: 16px; width: 3px; height: 0; background: #f00; border-radius: 2px; transition: height 0.3s; }
+    .el-arm { position: absolute; top: 10px; right: -16px; width: 22px; height: 6px; background: #ffd4b2; border-radius: 3px; transform-origin: left; transition: 0.3s; }
+    .tele-aura { position: absolute; top: -15px; right: -45px; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, rgba(0,240,255,0.7) 0%, transparent 70%); opacity: 0; transition: 0.3s; }
+    .eleven-active { transform: translateY(-30px); } .eleven-active .el-arm { transform: rotate(-25deg); } .eleven-active .blood-drop { height: 12px; box-shadow: 0 0 5px red; } .eleven-active .tele-aura { opacity: 1; transform: scale(1.4); }
+    /* Dustin */
+    #dustin { left: 210px; } #dustin .body { background: #1f4270; }
+    .dus-cap { position: absolute; top: -6px; left: -5px; width: 42px; height: 16px; background: #e02828; border-radius: 12px 12px 0 0; }
+    .dus-cap::after { content: ''; position: absolute; bottom: 0; right: -8px; width: 14px; height: 5px; background: #fff; border-radius: 3px; }
+    .walkie { position: absolute; right: -12px; top: 15px; width: 10px; height: 24px; background: #222; border-radius: 2px; }
+    .walkie::before { content: ''; position: absolute; top: -16px; right: 2px; width: 2px; height: 16px; background: #aaa; }
+    .radio-wave { position: absolute; top: -25px; right: -10px; font-size: 18px; color: #00ff66; opacity: 0; }
+    .dustin-active .radio-wave { opacity: 1; animation: pulse 0.6s infinite alternate; }
+    /* Steve */
+    #steve { left: 360px; } #steve .body { background: #7b6d65; }
+    .ste-hair { position: absolute; top: -12px; left: -4px; width: 40px; height: 22px; background: #3b2219; border-radius: 16px 16px 4px 4px; }
+    .bat { position: absolute; right: -24px; top: -10px; width: 8px; height: 48px; background: #b5651d; border-radius: 4px; transform-origin: bottom; transform: rotate(25deg); transition: 0.2s; }
+    .bat::after { content: '✦'; position: absolute; top: 4px; left: -1px; color: #fff; font-size: 11px; }
+    .steve-active .bat { transform: rotate(-70deg) translateY(10px); }
+    /* Dart */
+    #dart { left: 520px; }
+    .dart-body { width: 65px; height: 35px; background: #2f343b; border-radius: 20px 30px 15px 15px; position: relative; }
+    .dart-head { position: absolute; right: -18px; top: -4px; width: 32px; height: 32px; background: #800e26; border-radius: 50%; transition: 0.2s; }
+    .dart-legs { position: absolute; bottom: -14px; width: 100%; display: flex; justify-content: space-around; }
+    .dart-legs span { width: 5px; height: 16px; background: #1a1c20; border-radius: 2px; }
+    .dart-active { transform: translateX(50px) scale(1.15); } .dart-active .dart-head { transform: scale(1.4) rotate(45deg); box-shadow: 0 0 12px #ff0044; }
+    /* Vecna */
+    #vecna { right: 60px; } #vecna .body { width: 42px; height: 85px; background: #261922; } #vecna .head { background: #503f4c; }
+    .vec-clock { position: absolute; top: -60px; right: -30px; font-size: 44px; opacity: 0.2; transition: 0.4s; }
+    .mind-beam { position: absolute; top: 25px; left: -480px; width: 480px; height: 4px; background: linear-gradient(to left, #ff0044, transparent); box-shadow: 0 0 10px #ff0044; opacity: 0; }
+    .vecna-active .vec-clock { opacity: 0.9; transform: scale(1.2); filter: drop-shadow(0 0 10px #f00); } .vecna-active .mind-beam { opacity: 1; }
+    /* Dashboard y Botón */
+    .dashboard { width: 900px; margin-top: 15px; display: flex; gap: 15px; }
+    .log-box { flex: 1; height: 110px; background: #000; border: 1px solid #222; border-radius: 8px; padding: 10px; color: #00ff66; font-size: 13px; overflow-y: auto; }
+    .btn-action { background: #ff0044; color: #fff; border: none; padding: 0 35px; font-size: 15px; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 0 15px #ff0044; transition: 0.2s; }
+    .btn-action:hover { transform: scale(1.05); box-shadow: 0 0 25px #ff0044; } .btn-action:disabled { background: #444; cursor: not-allowed; box-shadow: none; }
+  </style>
+</head>
+<body>
+  <h1>⚡ HAWKINS 2D LIVE BATTLEGROUND ⚡</h1>
+  <div id="stage-container">
+    <div class="floor"></div>
+    <div class="figure" id="eleven"><div class="head"><div class="el-hair"></div><div class="blood-drop"></div></div><div class="body"><div class="el-arm"></div><div class="tele-aura"></div></div><span class="figure-name">Eleven</span></div>
+    <div class="figure" id="dustin"><div class="head"><div class="dus-cap"></div></div><div class="body"><div class="walkie"></div><div class="radio-wave">〰️📡</div></div><span class="figure-name">Dustin</span></div>
+    <div class="figure" id="steve"><div class="head"><div class="ste-hair"></div></div><div class="body"><div class="bat"></div></div><span class="figure-name">Steve</span></div>
+    <div class="figure" id="dart"><div class="dart-body"><div class="dart-head"></div><div class="dart-legs"><span></span><span></span><span></span></div></div><span class="figure-name">Dart</span></div>
+    <div class="figure" id="vecna"><div class="vec-clock">🕰️</div><div class="head"></div><div class="body"><div class="mind-beam"></div></div><span class="figure-name">Vecna</span></div>
+  </div>
+  <div class="dashboard">
+    <div class="log-box" id="logBox">> Sistema de Hawkins listo. Pulsa iniciar para verlos actuar...</div>
+    <button class="btn-action" id="btnStart" onclick="runLiveBattle()">⚔️ INICIAR BATALLA</button>
+  </div>
+  <script>
+    const stage = document.getElementById('stage-container'), audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    for (let i = 0; i < 25; i++) {
+      const s = document.createElement('div'); s.className = 'spore'; s.style.width = (Math.random()*4+2)+'px'; s.style.height = s.style.width;
+      s.style.left = (Math.random()*880)+'px'; s.style.animationDuration = (Math.random()*5+4)+'s'; s.style.animationDelay = (Math.random()*4)+'s'; stage.appendChild(s);
+    }
+    function playTone(freq, type = 'sine', duration = 0.3, delay = 0) {
+      setTimeout(() => {
+        try {
+          const osc = audioCtx.createOscillator(), g = audioCtx.createGain();
+          osc.type = type; osc.frequency.value = freq; g.gain.setValueAtTime(0.12, audioCtx.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+          osc.connect(g); g.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + duration);
+        } catch(e){}
+      }, delay);
+    }
+    const logBox = document.getElementById('logBox'), log = msg => { logBox.innerHTML += `<br>> ${msg}`; logBox.scrollTop = logBox.scrollHeight; };
+    const turns = [
+      { id: 'eleven', act: 'eleven-active', msg: "👧 Eleven levita, desata su telequinesis... ¡y sangra por la nariz!", fn: () => { playTone(587, 'sine', 0.8); playTone(880, 'sine', 0.8, 150); }, dur: 1800 },
+      { id: 'dustin', act: 'dustin-active', msg: "🧢 Dustin coordina al grupo enviando señales por Cerebro.", fn: () => { playTone(440, 'square', 0.1); playTone(440, 'square', 0.1, 150); }, dur: 1500 },
+      { id: 'steve', act: 'steve-active', msg: "🏏 Steve Harrington blande su bate con clavos contra las sombras.", fn: () => playTone(110, 'triangle', 0.2), dur: 1500 },
+      { id: 'dart', act: 'dart-active', msg: "🐾 Dart salta hacia delante y abre sus fauces dentadas.", fn: () => playTone(90, 'sawtooth', 0.4), dur: 1600 },
+      { id: 'vecna', act: 'vecna-active', msg: "🧠 Suena el reloj de Vecna... ¡La melodía de Max invade la mente!", fn: () => [294, 330, 392, 330, 294, 262].forEach((f, i) => playTone(f, 'sawtooth', 0.35, i * 220)), dur: 2200 }
+    ];
+    async function runLiveBattle() {
+      const btn = document.getElementById('btnStart'); btn.disabled = true;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      for (const t of turns) {
+        const el = document.getElementById(t.id); el.classList.add(t.act); t.fn(); log(t.msg);
+        await new Promise(r => setTimeout(r, t.dur)); el.classList.remove(t.act);
+      }
+      log("🏁 Simulación finalizada. ¡Hawkins resiste!"); btn.disabled = false;
+    }
+  </script>
+</body>
+</html>
