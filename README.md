@@ -373,6 +373,40 @@ python -m http.server 8000
 
 ---
 
+## 🎓 DECLARACIÓN ACADÉMICA Y FINALIDAD EDUCATIVA
+
+> [!NOTE]
+> ### 🏛️ Marco Formativo y Propósito Didáctico
+> Este proyecto y todo su código fuente, arquitectura técnica, pruebas automatizadas y entorno visual interactivo han sido concebidos y desarrollados **exclusivamente con fines académicos, pedagógicos y de formación técnica**.
+
+### 📌 Alcance Profesional y Buenas Prácticas Demostradas
+* **Ingeniería de Software y Principios SOLID:** Demostración práctica de Programación Orientada a Objetos (**POO / OOP**), tipado estricto, encapsulamiento de estado, contratos e interfaces abstractas ([`Actionable`](contracts/actionable.py)), herencia jerárquica y polimorfismo dinámico en ejecución.
+* **Aseguramiento de Calidad (QA):** Implementación de una suite integral de pruebas unitarias basadas en comportamiento (*Behavior-Driven*), diseñadas para validar contratos sin acoplamiento rígido a valores arbitrarios.
+* **Frontend y Trazabilidad:** Desarrollo de un entorno interactivo en tiempo real ([`index.html`](index.html)) con registro de eventos acoplado al modelo de clases para visualización de conceptos técnicos.
+
+### ⚖️ Propiedad Intelectual, Marcas y Uso Legítimo (*Fair Use*)
+* Todos los nombres de personajes (*Eleven*, *Dustin Henderson*, *Steve Harrington*, *Dart / Demogorgon*, *Vecna*), escenarios (*Hawkins National Laboratory*, *The Upside Down* / *Mundo del Revés*), marcas y temas musicales (*"Running Up That Hill"* de Kate Bush) son propiedad intelectual exclusiva de sus respectivos creadores, autores y titulares de derechos (**Netflix**, **The Duffer Brothers** y compañías asociadas).
+* El uso de estos elementos se fundamenta estrictamente en la doctrina del **uso legítimo con fines formativos y de investigación académica (*Fair Use*)**, sin fines comerciales, lucrativos ni de explotación económica de ningún tipo.
+* Este trabajo se presenta como pieza técnica demostrativa para portafolio formativo de desarrollo de software.
+
+---
+
+<!-- FINAL DINÁMICO: EL MUNDO DEL REVÉS (UPSIDE DOWN) -->
+<div align="center">
+
+### 🌌 PORTAL DIMENSIONAL: HAWKINS • THE UPSIDE DOWN
+*Ondas gravitacionales de energía sintética y esporas orgánicas en ascenso permanente*
+
+<br/>
+
+<p align="center">
+  <img src="assets/upside_down_waves.svg" alt="Stranger Things Upside Down Waves & Spores Banner" width="100%">
+</p>
+
+</div>
+
+---
+
 <div align="center">
 
 Desarrollado con ❤️, café y waffles Eggo por **[Patricia Aparicio Díaz](https://github.com/apariciodiazpatricia-cell)**  
@@ -381,3 +415,4 @@ Desarrollado con ❤️, café y waffles Eggo por **[Patricia Aparicio Díaz](ht
 ⭐ **¡Deja una estrella en el repositorio si lograste escapar de Vecna!** ⭐
 
 </div>
+
