@@ -159,7 +159,7 @@ classDiagram
 
     class NormalHuman {
         +str key_item
-        +str vehicule
+        +str vehicle
         +act() void
         +use_item() void
         +pedal() void
@@ -272,13 +272,13 @@ Feature: Simulación de batalla en Hawkins (Stranger Things POO)
 
 La suite de pruebas con `unittest` valida la correspondencia exacta de cada escenario Gherkin:
 
-| # | Escenario Testeado | Método de Test | Aserción Principal | Estado |
+| # | Escenario Testeado | Método de Test | Aserción Principal y Cobertura | Estado |
 | :-: | :--- | :--- | :--- | :-: |
-| **01** | Desgaste psíquico de Eleven | `test_scenario_01_eleven_telekinesis_and_energy_drain` | `energy_level == 75` y `power_type == 'Telekinesis'` | `PASSED` ✅ |
-| **02** | Equipamiento de Dustin | `test_scenario_02_dustin_equipment_and_mobility` | `weapon == 'Walkie Cerebro'` y `vehicule == 'Bicycle'` | `PASSED` ✅ |
-| **03** | Bate con clavos de Steve | `test_scenario_03_steve_combat_and_vehicle` | `weapon == 'Spiked Bat'` y `vehicule == 'BMW'` | `PASSED` ✅ |
-| **04** | Dimensión y fase de Dart | `test_scenario_04_dart_creature_properties` | `origin_dimension == 'Upside Down'`, `growth_stage == 'Demodog'` | `PASSED` ✅ |
-| **05** | Maldición mental de Vecna | `test_scenario_05_vecna_curse_and_counter_song` | `current_victim == 'Max'`, `fatal_song == 'Running Up That Hill'` | `PASSED` ✅ |
+| **01** | Desgaste psíquico de Eleven | `test_scenario_01_eleven_telekinesis_and_energy_drain` | `energy_level < initial_energy` y `power_type == 'Telekinesis'` | `PASSED` ✅ |
+| **02** | Equipamiento de Dustin | `test_scenario_02_dustin_equipment_and_mobility` | `weapon == 'Walkie Cerebro'`, `vehicle == 'Bicycle'` y ejecución de `pedal()`, `use_item()` | `PASSED` ✅ |
+| **03** | Bate con clavos de Steve | `test_scenario_03_steve_combat_and_vehicle` | `weapon == 'Spiked Bat'`, `vehicle == 'BMW'` y ejecución de `attack()`, `flee()` | `PASSED` ✅ |
+| **04** | Dimensión y fase de Dart | `test_scenario_04_dart_creature_properties` | `origin_dimension == 'Upside Down'`, `growth_stage == 'Demodog'` y ejecución de `roar()`, `open_portal()` | `PASSED` ✅ |
+| **05** | Maldición mental de Vecna | `test_scenario_05_vecna_curse_and_counter_song` | `current_victim == 'Max'`, `fatal_song == 'Running Up That Hill'` y ejecución de `curse_victim()` | `PASSED` ✅ |
 | **06** | Polimorfismo en simulador | `test_scenario_06_polymorphic_battle_round` | `isinstance(char, Actionable)` y simulación sin fallos | `PASSED` ✅ |
 
 ### ⚡ Ejecución de Pruebas
@@ -323,7 +323,8 @@ El proyecto incluye una arena visual interactiva en HTML5:
 ```
 
 * 🌌 **Esporas interdimensionales**: Partículas orgánicas flotantes generadas en tiempo real.
-* 🩸 **Animaciones CSS**: Elevación psíquica de Eleven con sangre brotando, radiofrecuencia de Cerebro, balanceo del bate de Steve, ataque frontal de Dart y reloj maldito de Vecna.
+* 🩸 **Animaciones CSS y Medidor de Energía**: Elevación psíquica de Eleven con sangre brotando, barra de energía en tiempo real (desgaste de 95% a 75%), radiofrecuencia de Cerebro, balanceo del bate de Steve, ataque frontal de Dart y reloj maldito de Vecna.
+* 🖥️ **Terminal Educativa POO**: Trazabilidad en tiempo real que vincula cada acción en pantalla con su clase y método correspondiente (`PoweredHuman.act()`, `NormalHuman.pedal()`, etc.).
 * 🎵 **Web Audio Synth**: Sonidos de 8 bits y arpegio de notas sintetizadas (*"Running Up That Hill"*).
 
 ---
