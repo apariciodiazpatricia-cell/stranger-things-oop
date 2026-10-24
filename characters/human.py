@@ -30,10 +30,10 @@ class PoweredHuman(Human):
         print(f"🩸 {self.name}'s nose starts bleeding due to psychic strain.")
         
 class NormalHuman(Human):
-    def __init__(self, name: str,age: int, health: int, weapon: str, key_item: str, vehicule: str):
+    def __init__(self, name: str,age: int, health: int, weapon: str, key_item: str, vehicle: str):
         super().__init__(name,age,health,weapon)
         self.key_item=key_item
-        self.vehicule=vehicule
+        self.vehicle=vehicle
         
     def act(self):
         print(f"{self.name} strikes firmly using {self.weapon}!")
