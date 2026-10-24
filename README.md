@@ -1,5 +1,8 @@
 # 🌌 STRANGER THINGS: OOP BATTLE FOR HAWKINS 🚲
 
+<img width="2752" height="1536" alt="Gemini_Generated_Image_bv7s3bv7s3bv7s3b" src="https://github.com/user-attachments/assets/646fb132-bb36-4292-96af-c8912f186e61" />
+
+
 <div align="center">
 
 <!-- BANNER DINÁMICO CON TIPOGRAFÍA STRANGER THINGS (SVG ANIMADO) -->
