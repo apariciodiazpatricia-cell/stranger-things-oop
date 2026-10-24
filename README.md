@@ -205,7 +205,7 @@ classDiagram
 
 | Entidad | Clase | Rol | Atributos Notables | Comportamiento en `act()` |
 | :--- | :--- | :--- | :--- | :--- |
-| **Eleven** | `PoweredHuman` | Psíquica Defensora | Salud: `100` \| Energía: `95%` \| Poder: `Telekinesis` | Consume 20% de energía y le sangra la nariz (`bleed_nose()`). Si no tiene energía, debe descansar. |
+| **Eleven** | `PoweredHuman` | Psíquica Defensora | Salud: `100` \| Energía: `95%` \| Poder: `Telekinesis` | Consume energía al usar su poder (20% por defecto) y le sangra la nariz (`bleed_nose()`). Si no tiene energía suficiente, debe descansar. |
 | **Dustin** | `NormalHuman` | Estratega / Radio | Salud: `100` \| Arma: `Walkie Cerebro` \| Item: `Cap` \| Bici: `Bicycle` | Coordina al grupo utilizando las transmisiones del Walkie Cerebro. |
 | **Steve** | `NormalHuman` | Protector / Niñera | Salud: `100` \| Arma: `Spiked Bat` \| Item: `Hairspray` \| Auto: `BMW` | Asesta impactos firmes con su bate de clavos protegiendo al grupo. |
 | **Dart** | `Demogorgon` | Bestia Depredadora | Salud: `80` \| Dimensión: `Upside Down` \| Debilidad: `Fire` \| Fase: `Demodog` | Salta desde las sombras y es capaz de abrir portales interdimensionales. |
@@ -280,6 +280,16 @@ La suite de pruebas con `unittest` valida la correspondencia exacta de cada esce
 | **04** | Dimensión y fase de Dart | `test_scenario_04_dart_creature_properties` | `origin_dimension == 'Upside Down'`, `growth_stage == 'Demodog'` y ejecución de `roar()`, `open_portal()` | `PASSED` ✅ |
 | **05** | Maldición mental de Vecna | `test_scenario_05_vecna_curse_and_counter_song` | `current_victim == 'Max'`, `fatal_song == 'Running Up That Hill'` y ejecución de `curse_victim()` | `PASSED` ✅ |
 | **06** | Polimorfismo en simulador | `test_scenario_06_polymorphic_battle_round` | `isinstance(char, Actionable)` y simulación sin fallos | `PASSED` ✅ |
+
+> [!TIP]
+> **💡 Principio de Diseño: Aserciones Desacopladas (Gasto Energético de Eleven)**  
+> En el test de Eleven (`test_scenario_01_eleven_telekinesis_and_energy_drain`), la validación no está rígidamente acoplada a un valor absoluto (`energy_level == 75`), sino al comportamiento de reducción relativa:
+> ```python
+> initial_energy = self.eleven.energy_level
+> self.eleven.act()
+> self.assertLess(self.eleven.energy_level, initial_energy)
+> ```
+> **Ventaja técnica:** Esto permite que el coste de invocación de *Telekinesis* pueda balancearse libremente (consumiendo 20%, 10%, o cualquier gasto configurable) sin romper los contratos de prueba, garantizando una suite robusta y centrada en el comportamiento (*Behavior-Driven*) en lugar de valores arbitrarios fijos.
 
 ### ⚡ Ejecución de Pruebas
 
