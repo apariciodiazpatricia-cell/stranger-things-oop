@@ -391,19 +391,7 @@ python -m http.server 8000
 
 ---
 
-<!-- FINAL DINÁMICO: EL MUNDO DEL REVÉS (UPSIDE DOWN) -->
-<div align="center">
 
-### 🌌 PORTAL DIMENSIONAL: HAWKINS • THE UPSIDE DOWN
-*Ondas gravitacionales de energía sintética y esporas orgánicas en ascenso permanente*
-
-<br/>
-
-<p align="center">
-  <img src="assets/upside_down_waves.svg" alt="Stranger Things Upside Down Waves & Spores Banner" width="100%">
-</p>
-
-</div>
 
 ---
 
@@ -413,6 +401,18 @@ Desarrollado con ❤️, café y waffles Eggo por **[Patricia Aparicio Díaz](ht
 *Hawkins National Laboratory • Department of Energy & OOP Science*
 
 ⭐ **¡Deja una estrella en el repositorio si lograste escapar de Vecna!** ⭐
+
+</div>
+
+<!-- FINAL DINÁMICO: EL MUNDO DEL REVÉS (UPSIDE DOWN) -->
+<div align="center">
+
+
+<br/>
+
+<p align="center">
+  <img src="assets/upside_down_waves.svg" alt="Stranger Things Upside Down Waves & Spores Banner" width="100%">
+</p>
 
 </div>
 
